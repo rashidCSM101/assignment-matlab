@@ -238,25 +238,25 @@ Memory & Infinite & 2 samples \\
 \section{Problem 2: Simulation of Bimetallic Strip Behaviour for Temperature-Control Applications}
 
 \subsection{Background and Engineering Context}
-Passive Bimetallic strips are common passive transducers in electrical and electronic engineering systems that require mechanical displacement that can be predicted as temperatures change without input of external energy (power). Common uses would be thermostats, thermal circuit breakers, overload protection devices and temperature-controlled switching devices. The same factors make them relevant to industry, as they are simple and reliable in all types of industrial application and have a failure mode that is fail-safe. The bimetallic strip is a rigidly bonded two dissimilar metallic strip. Internal stresses developed when the two materials are exposed to a change in temperature causes the two to bend in response to the difference in coefficients of thermal expansion. The strip curvature and the consequent tip displacement are functions of material properties, geometry, bonding conditions and temperature change, which are deterministic. This thermo-mechanical response must be accurately predicted hence it is to be integrated into temperature-control systems during design. The present research is aimed at the design and modelling of a bimetallic strip in ANSYS Workbench, and a direct comparison of the analytical formulations of curvature and results of finite-element simulation \cite{timoshenko1925}.
+Passive Bimetallic strips are common passive transducers in electrical and electronic engineering systems that require mechanical displacement that can be predicted as temperatures change without input of external energy (power). Common uses would be thermostats, thermal circuit breakers, overload protection devices and temperature-controlled switching devices \cite{timoshenko1925}. The same factors make them relevant to industry, as they are simple and reliable in all types of industrial application and have a failure mode that is fail-safe. The bimetallic strip is a rigidly bonded two dissimilar metallic strip. Internal stresses developed when the two materials are exposed to a change in temperature causes the two to bend in response to the difference in coefficients of thermal expansion \cite{cepon2017}. The strip curvature and the consequent tip displacement are functions of material properties, geometry, bonding conditions and temperature change, which are deterministic. This thermo-mechanical response must be accurately predicted hence it is to be integrated into temperature-control systems during design. The present research is aimed at the design and modelling of a bimetallic strip in ANSYS Workbench, and a direct comparison of the analytical formulations of curvature and results of finite-element simulation \cite{timoshenko1925,angel2013}.
 
 \subsection{Analytical Theory of Bimetallic Strip Curvature}
-Given a uniform temperature change $\Delta T$ on a bonded bimetallic strip, the resulting misfit strain $\varepsilon$ is given as:
+Given a uniform temperature change $\Delta T$ on a bonded bimetallic strip, the resulting misfit strain $\varepsilon$ is given as \cite{timoshenko1925}:
 \begin{equation}
 \varepsilon = (\alpha_1 - \alpha_2) \Delta T
 \end{equation}
 
-Where $\alpha_1$ and $\alpha_2$ are the thermal expansion coefficients of material 1 and 2 respectively. The curvature $\kappa$ which is the inverse of the radius of curvature is according to the standard analytical expression:
+Where $\alpha_1$ and $\alpha_2$ are the thermal expansion coefficients of material 1 and 2 respectively. The curvature $\kappa$ which is the inverse of the radius of curvature is according to the standard analytical expression \cite{khatkhate2017,angel2013}:
 \begin{equation}
 \kappa = \frac{6(\alpha_1 - \alpha_2)(1 + m)^2 \Delta T}{h(3(1 + m)^2 + (1 + mn)(m^2 + \frac{1}{mn}))}
 \end{equation}
 
-Where $E_1$, $E_2$ are Young's moduli, and $h_1$, $h_2$ are the thickness of the two layers. When at thermal equilibrium, the curvature may be correlated with displacement of quantifiable distance $\delta$ at a strip length of $x$ using:
+Where $E_1$, $E_2$ are Young's moduli, and $h_1$, $h_2$ are the thickness of the two layers. When at thermal equilibrium, the curvature may be correlated with displacement of quantifiable distance $\delta$ at a strip length of $x$ using \cite{lubarda2022}:
 \begin{equation}
 \delta = \frac{\kappa x^2}{2}
 \end{equation}
 
-These statements constitute the analytical standard on which the results of simulation are compared \cite{cepon2017}.
+These statements constitute the analytical standard on which the results of simulation are compared \cite{cepon2017,angel2013}.
 
 \subsection{Geometry and Dimensional Design}
 The bimetallic strip was created in the form of a cantilever beam and this beam was of a rectangular shape which is representative of thermostat and thermal-switch usage. The geometry was directly designed in ANSYS Design Modeler with dimensional symmetry being ensured in order to isolate material-driven effects.
@@ -278,7 +278,7 @@ Key dimensions adopted were:
 Thick levels were made equal to intentionally create an easier parallel of analysis and to ensure that there is a reduction in the numerical bias over one material. The cantilever geometry allows the direct measurement of the tip motion that is important in the curvature extraction and application-oriented interpretation \cite{khatkhate2017}.
 
 \subsection{Material Selection and Engineering Data}
-This strip was made out of brass and structural steel which is also a common pairing in industry because they have very different thermal expansion coefficients and mechanical stiffness. The ANSYS Engineering Data library was used to define material properties:
+This strip was made out of brass and structural steel which is also a common pairing in industry because they have very different thermal expansion coefficients and mechanical stiffness \cite{timoshenko1925,cepon2017}. The ANSYS Engineering Data library was used to define material properties:
 
 \textbf{Brass:} greater coefficient of thermal expansion, less youngs modulus
 
@@ -298,7 +298,7 @@ This strip was made out of brass and structural steel which is also a common pai
 \label{fig:prob2_steel}
 \end{figure}
 
-The interface layer between the two layers was modelled as a perfect bond, which is an ideal riveted or brazed connection. This can be assumed to be true when the strips are of high integrity, in the case of bimetallic strips used in industry and it also guarantees a complete strain compatibility across the interface. The effects of any interfacial compliance were therefore avoided by design in order to have an analytical consistency.
+The interface layer between the two layers was modelled as a perfect bond, which is an ideal riveted or brazed connection \cite{cepon2017}. This can be assumed to be true when the strips are of high integrity, in the case of bimetallic strips used in industry and it also guarantees a complete strain compatibility across the interface \cite{lubarda2022}. The effects of any interfacial compliance were therefore avoided by design in order to have an analytical consistency.
 
 \subsection{Finite Element Modelling Strategy}
 ANSYS Static Structural was used to carry out the simulation with thermal strain coupling. A sequentially coupled scheme was assumed and in this scheme temperature loading was provided as a direct body condition to cause the phenomenon of thermal expansion. The mesh was made of the hexahedral dominant elements and refined in terms of the thickness in order to bring the bending stresses and curvature gradients into the mesh. Mesh convergence was confirmed with the stability of tip displacement by successive refinement \cite{angel2013}.
@@ -391,7 +391,7 @@ The stresses were also observed to be maximum at the fixed end and the bonding i
 This is an important need in cyclic temperature-control applications, where the long-term fatigue resistance is important.
 
 \subsubsection{Curvature Extraction and Analytical Comparison}
-The displacement-based curvature relation was used to compute the curvature values based on the results of a simulation. The comparison of these values was made with analytically predicted curvature as a result of material properties and geometry. The simulated and analytical curvature percentage deviation was not out of acceptable engineering (usually less than 10 percent). Minor discrepancies were explained by:
+The displacement-based curvature relation was used to compute the curvature values based on the results of a simulation \cite{angel2013,khatkhate2017}. The comparison of these values was made with analytically predicted curvature as a result of material properties and geometry \cite{timoshenko1925}. The simulated and analytical curvature percentage deviation was not out of acceptable engineering (usually less than 10 percent). Minor discrepancies were explained by \cite{cepon2017,lubarda2022}:
 \begin{itemize}
 \item Three dimensional effects of stress that are not considered as in the beam theory of analysis
 \item Three-dimensional stress effects neglected in analytical beam theory
@@ -913,6 +913,293 @@ Five major limitations were found:
 The hybrid DER system for Kaghan valley has proven the technical feasibility and economical viability of incorporating renewable energy in high altitude remote locations. Key outcomes are: a renewable energy share of 53.6\% with a pay back period of 3.2 years, a reduction of 52.6\% of CO$_2$ emissions (136 tonnes per annum) and system availability of 97.8\% with little curtailment (0.2\%). Although the system did not quite achieve the ambitious 85\% target set for renewable, it offers a solid basis for expansion in the future whilst providing immediate benefits to the economy and environment. Kaghan Valley is not a unique example among thousands of distant tourist places in South Asia, the Middle East, and Africa that are being confronted with the same energy access challenges.
 
 The system design methodology, which includes the resource assessment, sizing of components, energy management simulation and techno-economic optimization, provides a replicable system design framework adaptable for local conditions. Important factors that have aided its success are plentiful renewable resources, high diesel costs as a baseline, a conducive policy environment, and technical capacity building. This case study shows that hybrid DER systems are a viable solution to enhance energy access, economic development and climate action in remote regions, which is in line with UN Sustainable Development Goal 7 (Affordable and Clean Energy) and 13 (Climate Action).
+
+\appendices
+
+\section{MATLAB Code for Problem 1a: ODE Solvers}
+\begin{small}
+\begin{verbatim}
+clear all; close all; clc;
+
+%% EQUATION 1: dy/dt = t^2, y(0) = 1, t in [0, 10]
+fprintf('=== EQUATION 1: dy/dt = t^2 ===\n');
+ode1 = @(t, y) t^2;
+y0_1 = 1; tspan1 = [0 10];
+[t_ode23_1, y_ode23_1] = ode23(ode1, tspan1, y0_1);
+[t_ode45_1, y_ode45_1] = ode45(ode1, tspan1, y0_1);
+t_analytical1 = linspace(0, 10, 100);
+y_analytical1 = (t_analytical1.^3)/3 + 1;
+% Plot and compare results...
+
+%% EQUATION 2: dy/dt = t^2/y, y(0) = 1, t in [0, 5]
+ode2 = @(t, y) t^2 / y;
+y0_2 = 1; tspan2 = [0 5];
+[t_ode23_2, y_ode23_2] = ode23(ode2, tspan2, y0_2);
+[t_ode45_2, y_ode45_2] = ode45(ode2, tspan2, y0_2);
+t_analytical2 = linspace(0, 5, 100);
+y_analytical2 = sqrt(2*t_analytical2.^3/3 + 1);
+
+%% EQUATION 3: dy/dt + 2y/t = t^4, y(1)=1, t in [1,8]
+ode3 = @(t, y) t^4 - 2*y/t;
+y0_3 = 1; tspan3 = [1 8];
+[t_ode23_3, y_ode23_3] = ode23(ode3, tspan3, y0_3);
+[t_ode45_3, y_ode45_3] = ode45(ode3, tspan3, y0_3);
+C = (y0_3 - 1^5/7) * 1^2;
+y_analytical3 = @(t) t.^5/7 + C./t.^2;
+\end{verbatim}
+\end{small}
+
+\section{MATLAB Code for Problem 1b: Van der Pol Oscillator}
+\begin{small}
+\begin{verbatim}
+clear all; close all; clc;
+
+%% VAN DER POL OSCILLATOR
+% d2x/dt2 - mu(1-x^2)(dx/dt) + x = 0
+% mu = 1, t in [0, 25], x(0) = 0, x'(0) = 2.5
+mu = 1;
+vanderpol = @(t, y) [y(2); mu*(1-y(1)^2)*y(2)-y(1)];
+y0 = [0; 2.5]; tspan = [0 25];
+[t_ode45, y_ode45] = ode45(vanderpol, tspan, y0);
+x = y_ode45(:,1); v = y_ode45(:,2);
+
+% Position vs Time
+figure; plot(t_ode45, x, 'b-', 'LineWidth', 1.5);
+xlabel('Time (s)'); ylabel('Position x(t)');
+title('Van der Pol Oscillator'); grid on;
+
+% Phase Portrait (Limit Cycle)
+figure; plot(x, v, 'b-', 'LineWidth', 1.5);
+xlabel('Position x'); ylabel('Velocity dx/dt');
+title('Phase Portrait'); grid on; axis equal;
+
+% 3D Trajectory
+figure; plot3(x, v, t_ode45, 'b-', 'LineWidth', 1.5);
+xlabel('Position'); ylabel('Velocity'); zlabel('Time');
+title('3D Trajectory'); grid on; view(45, 30);
+\end{verbatim}
+\end{small}
+
+\section{MATLAB Code for Problem 3: Single-Phase Inverter}
+\begin{small}
+\begin{verbatim}
+%% SINGLE-PHASE INVERTER - UK 230V, 50Hz
+clear; clc; close all;
+V_rms = 230; f_supply = 50;
+V_peak = V_rms * sqrt(2);
+V_dc = 0.95 * V_peak;  % DC link voltage
+R_load = 10; L_load = 10e-3; P_rated = 2000;
+f_switching = 50; T_switching = 1/f_switching;
+
+fprintf('DC Link: %.2f V\n', V_dc);
+fprintf('Load: R=%.0f Ohm, L=%.2f mH\n', R_load, L_load*1000);
+
+% H-Bridge: 4 Thyristors (T1-T4)
+% Positive: T1,T3 conduct
+% Negative: T2,T4 conduct
+% Dead time: 500 us
+
+% Performance Calculations
+Z_load = sqrt(R_load^2 + (2*pi*f_supply*L_load)^2);
+I_rms = V_rms / Z_load;
+P_active = V_rms * I_rms * R_load / Z_load;
+Q_reactive = V_rms*I_rms*2*pi*f_supply*L_load/Z_load;
+PF = cos(atan(2*pi*f_supply*L_load / R_load));
+
+fprintf('Impedance: %.2f Ohm\n', Z_load);
+fprintf('Current: %.2f A\n', I_rms);
+fprintf('Active Power: %.2f kW\n', P_active/1000);
+fprintf('Reactive Power: %.2f kVAR\n', Q_reactive/1000);
+fprintf('Power Factor: %.3f\n', PF);
+\end{verbatim}
+\end{small}
+
+\subsection*{Problem 3b: Three-Phase Inverter}
+\begin{small}
+\begin{verbatim}
+% Three-Phase SCR Inverter for UK Industrial Supply
+% 400V line-line, 50Hz, 10kW rated power
+
+V_line = 400; V_phase = V_line/sqrt(3);
+V_dc = 1.35*V_line; f = 50; omega = 2*pi*f;
+R_load = 15; L_load = 15e-3; T = 1/f;
+
+% Six-step commutation (120° conduction)
+% S1-S2-S3-S4-S5-S6 firing sequence
+t = 0:1e-5:0.06;
+V_A = zeros(size(t)); V_B = V_A; V_C = V_A;
+
+for i = 1:length(t)
+    theta = mod(omega*t(i), 2*pi);
+    
+    % Phase A: S1 (0-180°), S4 (180-360°)
+    if theta < pi
+        V_A(i) = V_dc/3;
+    else
+        V_A(i) = -V_dc/3;
+    end
+    
+    % Phase B: S3 (120-300°), S6 (300-120°)
+    if theta >= 2*pi/3 && theta < 5*pi/3
+        V_B(i) = V_dc/3;
+    else
+        V_B(i) = -V_dc/3;
+    end
+    
+    % Phase C: S5 (240-60°), S2 (60-240°)
+    if (theta >= 4*pi/3 || theta < pi/3)
+        V_C(i) = V_dc/3;
+    else
+        V_C(i) = -V_dc/3;
+    end
+end
+
+% Load current calculation (RL)
+Z = sqrt(R_load^2 + (omega*L_load)^2);
+I_peak = (V_dc/sqrt(3)) / Z;
+phi = atan(omega*L_load/R_load);
+
+I_A = I_peak*sin(omega*t - phi);
+I_B = I_peak*sin(omega*t - 2*pi/3 - phi);
+I_C = I_peak*sin(omega*t - 4*pi/3 - phi);
+
+% THD Calculation
+V_line_AB = V_A - V_B;
+[V_fund, V_harm] = fft_THD(V_line_AB, f, 1/1e-5);
+THD = V_harm/V_fund * 100;
+
+fprintf('Three-Phase Results:\n');
+fprintf('Line Voltage: %.1f V\n', V_line);
+fprintf('Load Current: %.1f A\n', rms(I_A));
+fprintf('THD: %.2f%%\n', THD);
+fprintf('Power Factor: %.3f\n', cos(phi));
+fprintf('Total Power: %.2f kW\n', 3*rms(I_A)*V_phase*cos(phi)/1000);
+\end{verbatim}
+\end{small}
+
+\section{MATLAB Code for Problem 4: Hybrid DER System}
+\begin{small}
+\begin{verbatim}
+%% HYBRID DER - Annual Simulation (8760 hours)
+% Kaghan Valley, Pakistan
+clear all; close all; clc;
+
+% System Specs
+P_solar = 150e3;      % Solar PV (W)
+P_wind = 30e3;        % Wind turbine (W)
+E_battery = 200e3;    % Battery (Wh)
+P_diesel = 100e3;     % Diesel gen (W)
+P_load_peak = 120e3;  % Peak load (W)
+P_load_base = 25e3;   % Base load (W)
+
+hours_per_year = 8760;
+time_hours = 0:1:(hours_per_year-1); dt = 1;
+
+% Solar Irradiance (seasonal)
+solar_irradiance = zeros(1, hours_per_year);
+for h = 1:hours_per_year
+    month = ceil(h / 730);
+    hour_of_day = mod(h-1, 24);
+    if month >= 5 && month <= 9
+        daily_avg = 6500;  % Summer W/m2
+    else
+        daily_avg = 2800;  % Winter
+    end
+    if hour_of_day >= 6 && hour_of_day <= 18
+        solar_angle = (hour_of_day - 6) * pi / 12;
+        solar_irradiance(h) = daily_avg/8 * sin(solar_angle);
+    end
+    solar_irradiance(h) = solar_irradiance(h) * ...
+                          (0.7+0.3*rand());
+end
+
+% Wind Speed (Weibull)
+wind_speed = wblrnd(6.2, 2, 1, hours_per_year);
+altitude_factor = 0.743;  % 74.3% at 2500m
+
+% Solar Generation
+eta_solar = 0.18; area_solar = 833;
+system_losses = 0.15;
+P_solar_gen = solar_irradiance * area_solar * ...
+              eta_solar * (1 - system_losses);
+
+% Wind Generation
+cut_in = 3; rated = 12; cut_out = 25;
+P_wind_gen = zeros(size(wind_speed));
+for h = 1:hours_per_year
+    v = wind_speed(h);
+    if v >= cut_in && v < rated
+        P_wind_gen(h) = P_wind*((v-cut_in)/(rated-cut_in))^3;
+    elseif v >= rated && v < cut_out
+        P_wind_gen(h) = P_wind;
+    end
+end
+P_wind_gen = P_wind_gen * altitude_factor;
+
+% Battery & Load profiles
+SOC = zeros(1, hours_per_year); SOC(1) = 0.5;
+eta_battery = 0.90;
+P_load = zeros(1, hours_per_year);
+P_diesel_gen = zeros(1, hours_per_year);
+E_curtailed = 0; E_unserved = 0;
+
+% Energy Management
+for h = 2:hours_per_year
+    % Load profile (seasonal + daily variation)
+    month = ceil(h / 730);
+    hour_of_day = mod(h-1, 24);
+    if month >= 5 && month <= 9
+        base = 0.8 * P_load_peak;
+    else
+        base = 0.3 * P_load_peak;
+    end
+    if hour_of_day >= 18 && hour_of_day <= 23
+        P_load(h) = P_load_peak * (0.9+0.1*rand());
+    else
+        P_load(h) = base * (0.9+0.2*rand());
+    end
+    
+    % Energy balance
+    P_renewable = P_solar_gen(h) + P_wind_gen(h);
+    P_net = P_renewable - P_load(h);
+    
+    if P_net > 0  % Excess
+        E_charge = min(P_net*dt, (1-SOC(h-1))*E_battery) ...
+                   * eta_battery;
+        SOC(h) = SOC(h-1) + E_charge / E_battery;
+        if SOC(h) >= 1.0
+            SOC(h) = 1.0;
+            E_curtailed = E_curtailed + (P_net*dt-E_charge);
+        end
+    else  % Deficit
+        E_discharge = min(-P_net*dt, SOC(h-1)*E_battery);
+        SOC(h) = SOC(h-1) - E_discharge / E_battery;
+        if SOC(h) < 0.2 && -P_net > 10e3
+            P_diesel_gen(h) = min(-P_net+10e3, P_diesel);
+            SOC(h) = 0.2;
+        end
+        if SOC(h) < 0
+            SOC(h) = 0;
+            E_unserved = E_unserved + (-P_net*dt-E_discharge);
+        end
+    end
+end
+
+% Annual Results
+E_solar = sum(P_solar_gen)*dt/1e6;
+E_wind = sum(P_wind_gen)*dt/1e6;
+E_diesel = sum(P_diesel_gen)*dt/1e6;
+E_renewable = E_solar + E_wind;
+ren_frac = E_renewable/(E_renewable+E_diesel);
+
+fprintf('Solar: %.1f MWh\n', E_solar);
+fprintf('Wind: %.1f MWh\n', E_wind);
+fprintf('Diesel: %.1f MWh\n', E_diesel);
+fprintf('Renewable: %.1f%%\n', ren_frac*100);
+fprintf('Curtailed: %.2f MWh\n', E_curtailed/1e6);
+fprintf('Unserved: %.2f MWh\n', E_unserved/1e6);
+\end{verbatim}
+\end{small}
 
 \begin{thebibliography}{00}
 \bibitem{vanderpol1926} B. Van der Pol, ``On relaxation-oscillations,'' \textit{The London, Edinburgh, and Dublin Philosophical Magazine and Journal of Science}, vol. 2, no. 11, pp. 978--992, 1926.
